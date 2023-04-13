@@ -79,8 +79,39 @@ def dictionaries():
 
 # Lecture 19 - Destructuring Variables.
 def destructuring_variables():
-    pass
+
+    # Here is the basic principle of destructuring.
+    t = 5, 11
+    x, y = t
+    print(x, y)
+
+    # Now another example.
+    student_attendance = {"Rolf": 96, "Bob": 80, "Anne": 100}
+    print(list(student_attendance.items()))
+
+    # For each iteration, it will destructure the list into two separate variables.
+    for t in student_attendance.items():
+        print(t)
+
+    people = [("Matheus", 22), ("Alice", 24)]
+
+    for name, age in people:
+        print(f"Name: {name}, Age: {age}")
+
+
+# Lecture 24 - Lambda Functions.
+def lambda_functions():
+    
+    # A lambda function is different type of function, which doesn't have a name.
+    # Lambda functions are exclusively used to operate on inputs and return outputs.
+    add = lambda x, y: x + y
+    print(add(5, 5))
+
+    # We can use the map() function to do an operation on each item of an array.
+    sequence = [1, 2, 3, 4, 5]
+    doubled = list(map(lambda x: x * 2, sequence))
+    print(doubled)
 
 def main():
-    dictionaries()
+    lambda_functions()
 main()

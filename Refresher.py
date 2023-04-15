@@ -112,6 +112,67 @@ def lambda_functions():
     doubled = list(map(lambda x: x * 2, sequence))
     print(doubled)
 
+# Lecture 25 - Dictionary comprehensions.
+def dict_comprehension():
+    users = [
+        (0, "Bob", "password"),
+        (1, "Rolf", "rolf123"),
+        (2, "Jose", "longpassword")
+    ]
+
+    username_mapping = {user[1]: user for user in users}
+
+    username_input = input("Enter your username: ")
+    password_input = input("Enter your password: ")
+
+    _, username, password = username_mapping[username_input]
+    
+    if password_input == password:
+        print("Your details are correct!")
+
+
+# Lecture 26 - Unpacking arguments.
+def unpack_args():
+
+    # This function will have a set of arguments that will be collected into a
+    # tuple of arguments. 
+    def multiply(*args):
+        print(args)
+        total = 1
+        for arg in args:
+            total = total * arg
+        return total
+
+    print(multiply(1, 3, 5))
+
+    # If we pass as *nums it will deconstruct the arry and add it to the respective
+    # parameters.
+    def add(x, y):
+        return x + y
+
+    nums = [3, 4]
+    print(add(*nums))
+
+    nums = {"x": 5, "y": 10}
+    print(add(**nums))
+
+# Lecture 28 - Object-Oriented Programming.
+def OOP():
+    
+    class Student:
+        def __init__(self, name, grades):
+            self.name = name
+            self.grades = grades
+        
+        def average(self):
+            return sum(self.grades) / len(self.grades)
+        
+    student = Student("Bob", (90, 90, 93, 78, 84))
+    print(student.name)
+    print(student.average())
+
+
+
 def main():
-    lambda_functions()
+    OOP()
 main()

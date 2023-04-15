@@ -171,8 +171,169 @@ def OOP():
     print(student.name)
     print(student.average())
 
+# Lecture 29 - Magic methods: __str__ and __repr__
+def magic_methods():
+    
+    class Person:
+        def __init__(self, name, age):
+            self.name = name
+            self.age = age
+
+        # This method gets called when you want to turn your object into a string
+        def __str__(self):
+            return f"{self.name} is {self.age} years old"
+
+        # The goal of this method is to be unambiguos and return a string that
+        # allows us to recreate the original object.
+        def __repr__(self):
+            return f"<Person('{self.name}', {self.age})>"
+
+    bob = Person("Bob", 35)
+    print(bob)
+
+# Lecture 30 - Class methods and static methods.
+def class_n_static_methods():
+    
+    class ClassTest:
+        
+        # It's called an instance method because we call it on the instance.
+        # An instance is an object, so these kinds of methods need to have
+        # an object to be able to call them.
+        def instance_method(self):
+            print(f"Called instance_method of {self}")
+
+        # With class methods, we use the 'cls' parameter instead of 'self'.
+        # When we put the '@classmethod', it means that the passed argument
+        # will be the class itself.
+        @classmethod
+        def class_method(cls):
+            print(f"Called class_method of {cls}")
+
+        # Static methods is a function inside a class which does not use it's
+        # information.
+        @staticmethod
+        def static_method():
+            print("Called static_method")
+
+
+    test = ClassTest()
+    test.instance_method()
+
+    ClassTest.class_method()
+
+    ClassTest.static_method()
+
+    # Example on using class methods.
+    class Book:
+        
+        # This is a class variable.
+        TYPES = ("hardcover", "paperback")
+
+        def __init__(self, name, book_type, weight):
+            self.name = name
+            self.book_type = book_type
+            self.weight = weight
+        
+        def __repr__(self):
+            return f"<Book '{book.name}', '{book.book_type}', {book.weight} g>"
+
+        @classmethod
+        def hardcover(cls, name, page_weight):
+            return Book(name, Book.TYPES[0], (page_weight * 100 ) + 100)
+
+        @classmethod
+        def paperback(cls, name, page_weight):
+            return  Book(name, Book.TYPES[1], page_weight * 100)
+
+    book = Book.paperback("To Kill a Mockingbird", 70)
+
+    print(book.name)
+
+
+# Lecture 31 - Class inheritance.
+def class_inheritance():
+
+    class Device:
+
+        def __init__(self, name, connected_by):
+            self.name = name
+            self.connected_by = connected_by 
+            self.connected = True
+
+        def __str__(self):
+            return f"Device {self.name!r}, ({self.connected_by})"
+
+        def disconnect(self):
+            self.connected = False
+            print("Disconnected.")
+
+    # The 'Printer' class will inherit from the 'Device' class.
+    class Printer(Device):
+        
+        def __init__(self, name, connected_by, capacity):
+            super().__init__(name, connected_by) # Call the '__init__' method from the parent class.
+            self.capacity = capacity
+            self.remaining_pages = capacity
+
+        def __str__(self):
+            return f"{super().__str__()} ({self.remaining_pages} pages remaining)"
+
+        def print(self, pages):
+            if not self.connected:
+                print("Your printer is not connected!")
+            else:
+                print(f"Pirnting {pages} pages...")
+                self.remaining_pages -= pages
+
+
+    printer = Printer("Printer", "USB", 500)
+    printer.print(20)
+    print(printer)
+
+
+# Lecture 32 - Class composition.
+def class_comp():
+
+    # Composition is a counterpart to inheritance to build classes that use
+    # other classes. Composition allows classes to be simpler and reduces
+    # the complexity of the code.
+
+    class BookShelf:
+
+        def __init__(self, *books):
+            self.books = books
+            self.quantity = len(self.books)
+
+        def __str__(self):
+            return f"BookShelf with {self.quantity} books"
+
+    class Book:
+
+        def __init__(self, name):
+            self.name = name
+
+        def __str__(self):
+            return f"Book's title: {self.name}"
+
+    book_lotr = Book('Lord of the Rings')
+    book_got = Book('A Game of Thrones')
+    shelf = BookShelf(book_lotr, book_got)
+    print(shelf)
+
+
+# Lecture 33 - Type hinting
+def type_hinting():
+
+    # This function is going to return a 'float' type variable
+    # because of the use of '->' and also the passed argument
+    # must specifically be a list.
+    def list_avg(sequence: list) -> float:
+        return sum(sequence)/len(sequence)
+
+    print(list_avg([9, 7.8, 8.2]))
 
 
 def main():
-    OOP()
+    type_hinting()
 main()
+

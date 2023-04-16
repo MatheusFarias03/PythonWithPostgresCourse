@@ -1,3 +1,14 @@
+from database import add_entry, get_entries
+
+def prompt_new_entry():
+    entry_content = input("What have you learned today? ")
+    entry_date = input("Enter the date: ")
+    add_entry(entry_content, entry_date)
+
+def view_entries(entries):
+    for entry in entries:
+        print(f"{entry['date']}\n{entry['content']}\n\n")
+
 def main():
 
     menu = """Please select one of the following options:
@@ -13,10 +24,11 @@ def main():
     while (user_input := int(input(menu))) != 3:
         
         if user_input == 1:
-            print("adding...")
+            prompt_new_entry()
 
         elif user_input == 2:
-            print("viewing...")
+            view_entries(get_entries())
+            
 
         else:
             print("Invalid option, please try again.")

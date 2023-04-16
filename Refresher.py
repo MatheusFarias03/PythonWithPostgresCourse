@@ -333,7 +333,30 @@ def type_hinting():
     print(list_avg([9, 7.8, 8.2]))
 
 
+# Lecture 43 - Mutability
+def mutability():
+    
+    a = []
+    b = a
+
+    # 'a' and 'b' are names. The value is the empty list '[]'.
+
+    print(id(a))
+    print(id(b))
+
+    # The print method will return the same id because both are names
+    # for the same object.
+
+    a.append(35)
+
+    print(a)
+    print(b)
+
+    # In python, everything is mutable because everything is an object.
+    # Unless there are specifically no ways of changing the properites
+    # of objects itself.
+
 def main():
-    type_hinting()
+    mutability()
 main()
 

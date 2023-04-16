@@ -1,4 +1,4 @@
-from database import add_entry, get_entries
+from database import add_entry, get_entries, create_table
 
 def prompt_new_entry():
     entry_content = input("What have you learned today? ")
@@ -7,7 +7,7 @@ def prompt_new_entry():
 
 def view_entries(entries):
     for entry in entries:
-        print(f"{entry['date']}\n{entry['content']}\n\n")
+        print(f"{entry[1]}\n{entry[0]}\n\n")
 
 def main():
 
@@ -20,6 +20,7 @@ def main():
 
     welcome = "Welcome to the programming diary!"
     print(welcome)
+    create_table()
 
     while (user_input := int(input(menu))) != 3:
         

@@ -41,3 +41,29 @@ Today I learned how to use Python and SQLite
 02-01-2023
 Continued with Python and SQLite, including filtering results and updating values.
 ```
+
+## Movie Watchlist App
+
+### Project Features
+
+* Keep track of movies the user is interested in, and their release dates;
+* Store which movies the user has already watched;
+* Add new users to keep track of their watched movies separetly.
+
+### User Interface
+
+```sql
+Welcome to the watchlist app!
+
+Please select one of the following options:
+1) Add new movie;
+2) View upcoming movies;
+3) View all movies;
+4) Add watched movie;
+5) View watched movies;
+6) Add user to the app;
+7) Exit.
+
+Your selection:
+```
+
